@@ -8,14 +8,15 @@ import {
 } from 'react-native';
 
 import {Navigator} from 'react-native-deprecated-custom-components'
-import ZSMain from './app/main/ZSMain';
+// import ZSMain from './app/main/ZSMain';
+import ZSLaunch from './app/main/ZSLaunch';
 
 
 export default class App extends Component<Props> {
   render() {
     return (
         <Navigator
-            initialRoute={{name: "main", component: ZSMain}}
+            initialRoute={{name: "launch", component: ZSLaunch}}
             configureScene={(route) => Navigator.SceneConfigs.FloatFromRight}
             renderScene={(route, navigator) => {
                 let Component = route.component;

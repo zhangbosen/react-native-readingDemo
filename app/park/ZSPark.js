@@ -7,11 +7,24 @@ import {
     View
 } from 'react-native';
 
+//引入工具
+import Util from '../util/Util';
+
+//引入导航
+import ZSCommonNav from '../util/ZSCommonNav';
+
 
 export default class App extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
+                <ZSCommonNav
+                    leftTitle="扫一扫"
+                    rightTitle="设置"
+                    mainTitle="公园"
+                    clickLeftView={() => {alert("点击了左边")}}
+                    clickRightView={() => {alert("点击了右边")}}
+                />
                 <Text style={styles.welcome}>
                     公园页面
                 </Text>
@@ -23,9 +36,7 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: Util.bgColor,
     },
     welcome: {
         fontSize: 20,
