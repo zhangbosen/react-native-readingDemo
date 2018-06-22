@@ -27,13 +27,15 @@ import ZSLogin from './ZSLogin';
 import ZSFour from './ZSFour';
 //引入第四行的点击跳转后的专题详情组件
 import ZSThemeDetail from './ZSThemeDetail';
+//引入第五行的组件:最新专题组件
+import ZSFive from './ZSFive';
 
 
 //拿到本地的数据
 const topData = require('./localData/TopData.json');
 const secondData = require('./localData/BannerData.json');
 const themeData = require('./localData/TheamData.json');
-
+const myReadingData = require('./localData/MyReading.json');
 
 export default class ZSRead extends Component {
     constructor(props) {
@@ -67,6 +69,12 @@ export default class ZSRead extends Component {
                     <ZSFour 
                         themeData={themeData}
                         clickThemeBtn={this._clickThemeBtn.bind(this)}
+                    />
+
+                    {/*第五行: 最新专题组件*/}
+                    <ZSFive 
+                        readData={myReadingData} 
+                        clickNewBtn={this._clickNewBtn.bind(this)}
                     />
 
 
@@ -108,6 +116,15 @@ export default class ZSRead extends Component {
     }
 
     _clickThemeDetail(url) {
+        this.props.navigator.push({
+            component: ZSWebView,
+            props: {
+                url
+            }
+        })
+    }
+    
+    _clickNewBtn(url) {
         this.props.navigator.push({
             component: ZSWebView,
             props: {
