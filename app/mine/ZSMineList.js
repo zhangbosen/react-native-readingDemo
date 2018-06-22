@@ -22,8 +22,15 @@ import ZSMineRowCell from './ZSMineRowCell';
 export default class App extends Component {
     static propTypes = {
         dataSource: PropTypes.array,
-        clickRow: PropTypes.func
+        clickRow: PropTypes.func,
+        headerView: PropTypes.object,
+        footerView: PropTypes.object,
+        insetHeight: PropTypes.number
     };
+    static defaultProps = {
+        //如果不给这个默认值的话, 在listView设置contentInset的top值的时候,就会报错误(Exception thrown while executing UI block: -[NSNull floatValue])
+        insetHeight: 0
+    }
 
     constructor(props) {
         super(props);
@@ -50,8 +57,12 @@ export default class App extends Component {
         return (
             <ListView
                 dataSource={this.state.ds}
+                renderHeader={this._renderHeader.bind(this)}
                 renderSectionHeader={this._renderSectionHeader.bind(this)}
                 renderRow={this._renderRow.bind(this)}
+                renderFooter={this._renderFooter.bind(this)}
+                contentInset={{top: -this.props.insetHeight}}
+                contentOffset={{y: this.props.insetHeight}}
             />
         );
     }
@@ -76,6 +87,15 @@ export default class App extends Component {
         this.setState({
             ds: this.state.ds.cloneWithRowsAndSections(dataBlob, sectionIDs, rowIDs)
         })
+    }
+
+    _renderHeader() {
+        if(this.props.headerView !== undefined) {
+            return this.props.headerView
+        }
+        else {
+            return <View />
+        }
     }
 
 
@@ -106,6 +126,17 @@ export default class App extends Component {
             
         )
     }
+    
+    _renderFooter() {
+        if(this.props.footerView !== undefined) {
+            return this.props.footerView
+        }
+        else {
+            return <View />
+        }
+    }
+    
+    
 }
 
 const styles = StyleSheet.create({

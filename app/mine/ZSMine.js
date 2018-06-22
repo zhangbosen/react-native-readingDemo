@@ -4,7 +4,9 @@ import {
     Platform,
     StyleSheet,
     Text,
-    View
+    View,
+    Image,
+    TouchableOpacity
 } from 'react-native';
 
 //引入工具
@@ -32,11 +34,25 @@ export default class App extends Component {
                 />
                 <ZSMineList
                     dataSource={listData}
+                    headerView={this._renderHeader()}
                     clickRow={this._onClickRow.bind(this)}
+                    insetHeight={300}
                 />
 
             </View>
         );
+    }
+
+    _renderHeader() {
+        return (
+            <View style={styles.headerView}>
+                <Image source={require('../../images/mine.png')} style={styles.headerBgImg} />
+                <TouchableOpacity style={styles.userView}>
+                    <Image source={require('../../images/person.png')} style={styles.mineIcon}/>
+                    <Text style={styles.loginText}>点击登录</Text>
+                </TouchableOpacity>
+            </View>
+        )
     }
 
     _onClickRow(sectionID, rowID) {
@@ -74,6 +90,28 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Util.bgColor,
+    },
+    headerBgImg: {
+        width: Util.screen.width,
+        height: Platform.OS === 'ios' ? Util.screen.height * 0.8 : Util.screen.height * 0.4
+    },
+    userView: {
+        width: 100,
+        height: 100,
+        alignItems: "center",
+        justifyContent: "center",
+        position: "absolute",
+        bottom: 30,
+        left: (Util.screen.width - 100) / 2
+    },
+    mineIcon: {
+        width: 60,
+        height: 60,
+        marginBottom: 10
+    },
+    loginText: {
+        color: "#fff",
+        backgroundColor: "transparent"
     }
 });
 

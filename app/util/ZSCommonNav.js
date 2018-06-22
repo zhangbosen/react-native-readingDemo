@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import Util from './Util';
 
 
-export default class App extends Component<Props> {
+export default class ZSCommonNav extends Component<Props> {
     static propTypes = {
         leftTitle: PropTypes.string,
         leftIcon: PropTypes.string,

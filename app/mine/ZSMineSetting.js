@@ -31,9 +31,19 @@ export default class App extends Component {
                 <ZSMineList
                     dataSource={listData}
                     clickRow={this._onClickRow.bind(this)}
+                    footerView={this._renderFooter()}
                 />
             </View>
         );
+    }
+
+    _renderFooter() {
+        return (
+            <TouchableOpacity style={styles.footerView}>
+                <Text style={styles.footerViewText}>立即登录</Text>
+
+            </TouchableOpacity>
+        )
     }
 
     _onClickRow(sectionID, rowID) {
@@ -68,7 +78,21 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Util.bgColor
+    },
+    footerView: {
+        height: 44,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 40,
+        backgroundColor: "#fff"
+    },
+    footerViewText: {
+        color: "red",
+        fontSize: 18
     }
+
+
+
 })
 
 

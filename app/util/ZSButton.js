@@ -15,12 +15,19 @@ export default class App extends Component {
         clickBtn: PropTypes.func,
         btnSty: View.propTypes.style,
         textSty: Text.propTypes.style,
-        title: PropTypes.string
+        title: PropTypes.string,
+        renderImage: PropTypes.func
+    };
+
+    static defaultProps = {
+        clickBtn(){},
+        renderImage(){}
     };
 
     render() {
         return (
             <TouchableOpacity onPress={() => {this.props.clickBtn()}} style={[styles.container, this.props.btnSty]}>
+                {this.props.renderImage()}
                 <Text style={[styles.btnText, this.props.textSty]}>{this.props.title}</Text>
             </TouchableOpacity>
         );
@@ -37,7 +44,8 @@ const styles = StyleSheet.create({
         backgroundColor: "red"
     },
     btnText: {
-        fontSize: 16
+        fontSize: 16,
+        backgroundColor: "transparent"
     }
 
 });
